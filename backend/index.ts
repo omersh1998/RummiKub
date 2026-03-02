@@ -18,21 +18,23 @@ const gameState = {
 // --- Game Logic ---
 const checkValidSet = (tiles: Tile[]): boolean => {
   if (tiles.length < 3) return false;
+
   const sorted = [...tiles].sort((a, b) => a.value - b.value);
   const isRun = sorted.every((t, i) =>
-    i === 0 || (t.color === sorted[0].color && t.value === sorted[i - 1].value + 1)
+    i === 0 || (t.color === sorted[0]!.color && t.value === sorted[i - 1]!.value + 1)
   );
   const uniqueColors = new Set(tiles.map(t => t.color));
-  const isGroup = tiles.every(t => t.value === tiles[0].value) &&
+  const isGroup = tiles.every(t => t.value === tiles[0]!.value) &&
     uniqueColors.size === tiles.length &&
     tiles.length <= 4;
+
   return isRun || isGroup;
 };
 
 const findValidSet = (hand: Tile[]): Tile[] | null => {
   for (let size = 3; size <= 4; size++) {
     const indices: number[] = [];
-    const comb = (start: number, depth: number) => {
+    const comb = (start: number, depth: number): Tile[] | null  => {
       if (depth === size) {
         const subset = indices.map(i => hand[i]!);
         if (checkValidSet(subset)) return subset;
