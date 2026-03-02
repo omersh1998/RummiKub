@@ -10,6 +10,7 @@ const DroppableRack: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <div
       ref={setNodeRef}
+      dir="ltr"
       className={`bg-orange-900/40 p-6 rounded-2xl border-t-4 flex flex-wrap justify-center gap-3 shadow-2xl min-h-[120px] w-full transition-colors ${
         isOver ? 'border-orange-400 bg-orange-800/60' : 'border-orange-950'
       }`}
@@ -60,7 +61,7 @@ export const PlayerRack: React.FC<PlayerRackProps> = ({ hand, selectedIds, onTil
               : 'bg-orange-900/60 text-orange-200 hover:bg-orange-800/80'
           }`}
         >
-          Color + Number
+          לפי צבע
         </button>
         <button
           onClick={() => setSortMode('number')}
@@ -70,7 +71,7 @@ export const PlayerRack: React.FC<PlayerRackProps> = ({ hand, selectedIds, onTil
               : 'bg-orange-900/60 text-orange-200 hover:bg-orange-800/80'
           }`}
         >
-          Number Only
+          לפי מספר
         </button>
       </div>
       <DroppableRack>

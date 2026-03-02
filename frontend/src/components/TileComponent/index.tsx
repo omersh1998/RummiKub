@@ -1,5 +1,7 @@
 // src/components/TileComponent/index.tsx
 import React from 'react';
+import Icon from '@mdi/react';
+import { mdiCircle } from '@mdi/js';
 import { TileProps, Color } from './types';
 
 const colorMap: Record<Color, string> = {
@@ -27,7 +29,7 @@ export const TileComponent: React.FC<TileProps> = ({
           onContextMenu(id);
         }
       }}
-      title={isHighlighted && onContextMenu ? 'Right-click to return to hand' : undefined}
+      title={isHighlighted && onContextMenu ? 'לחיצה ימנית להחזרה ליד' : undefined}
       className={`
         relative flex flex-col items-center justify-center
         w-12 h-16 sm:w-14 sm:h-20
@@ -49,8 +51,8 @@ export const TileComponent: React.FC<TileProps> = ({
       </span>
 
       {/* The little Rummikub dot */}
-      <div className={`text-[8px] mt-1 opacity-40 ${colorMap[color]}`}>
-        ●
+      <div className={`mt-1 opacity-40 ${colorMap[color]}`}>
+        <Icon path={mdiCircle} size={0.4} />
       </div>
 
       {/* Subtle shine effect for a "plastic" feel */}

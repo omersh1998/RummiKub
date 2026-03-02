@@ -29,6 +29,7 @@ const DroppableSet: React.FC<DroppableSetProps> = ({
   return (
     <div
       ref={setNodeRef}
+      dir="ltr"
       className={`flex bg-white/10 p-2 rounded-lg gap-1 border h-fit min-h-[88px] transition-colors ${
         isOver ? 'border-orange-400 bg-orange-900/30' : 'border-white/5'
       }`}
@@ -72,7 +73,7 @@ export const TableArea: React.FC<TableAreaProps> = ({
     >
       {table.length === 0 ? (
         <p className="text-white/30 text-sm italic self-center m-auto">
-          Drop tiles here to play
+          גרור אבנים לכאן כדי לשחק
         </p>
       ) : (
         table.map((set, idx) => (

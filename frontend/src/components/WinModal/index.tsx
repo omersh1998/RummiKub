@@ -1,11 +1,15 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Icon from '@mdi/react';
+import { mdiTrophy } from '@mdi/js';
 
 interface WinModalProps {
   isOpen: boolean;
+  onViewBoard?: () => void;
+  onNewGame?: () => void;
 }
 
-export const WinModal: React.FC<WinModalProps> = ({ isOpen }) => {
+export const WinModal: React.FC<WinModalProps> = ({ isOpen, onViewBoard, onNewGame }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -21,35 +25,35 @@ export const WinModal: React.FC<WinModalProps> = ({ isOpen }) => {
             transition={{ type: "spring", damping: 20, stiffness: 100 }}
             className="bg-[#fff9f0] rounded-2xl p-8 max-w-md text-center shadow-[0_20px_50px_rgba(236,72,153,0.3)] border-t-8 border-pink-400 relative overflow-hidden"
           >
-            {/* Decorative Heart Background */}
-            <div className="absolute -top-10 -right-10 text-pink-100 text-9xl rotate-12 select-none pointer-events-none">
-              ❤️
+            <div className="absolute -top-10 -end-10 text-pink-100 select-none pointer-events-none">
+              <Icon path={mdiTrophy} size={6} />
             </div>
 
-            <h2 className="text-4xl font-serif font-bold text-pink-600 mb-6">You Won! ❤️</h2>
+            <h2 className="text-4xl font-serif font-bold text-pink-600 mb-6 flex items-center justify-center gap-2">
+              <Icon path={mdiTrophy} size={1.5} />
+              ניצחת!
+            </h2>
 
-            <div className="space-y-4 text-gray-800 font-medium leading-relaxed italic">
-              <p>"My dearest,"</p>
-              <p>
-                Watching you solve this game is like watching you solve life—with
-                grace, intelligence, and a little bit of magic.
-              </p>
-              <p>
-                Just like these tiles, we're a perfect match. I'm so proud of
-                your win, but I'm even luckier to have you in my life.
-              </p>
+            <p className="text-gray-800 font-medium leading-relaxed">
+              סיימת את כל האבנים ביד. כל הכבוד!
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+              {onViewBoard && (
+                <button
+                  onClick={onViewBoard}
+                  className="px-6 py-3 rounded-full font-bold bg-slate-200 hover:bg-slate-300 text-slate-700 transition-colors"
+                >
+                  צפה בלוח
+                </button>
+              )}
+              <button
+                onClick={onNewGame ?? (() => window.location.reload())}
+                className="px-6 py-3 rounded-full font-bold bg-pink-500 hover:bg-pink-600 text-white transition-colors"
+              >
+                משחק חדש
+              </button>
             </div>
-
-            <div className="mt-8 pt-6 border-t border-pink-100">
-              <p className="text-pink-500 font-bold font-serif text-lg">- Your favorite developer</p>
-            </div>
-
-            <button
-              onClick={() => window.location.reload()}
-              className="mt-8 text-sm text-gray-400 hover:text-pink-400 transition-colors"
-            >
-              Play another round?
-            </button>
           </motion.div>
         </motion.div>
       )}
